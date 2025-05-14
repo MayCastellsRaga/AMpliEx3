@@ -20,7 +20,7 @@ public class MainB
             list.add(t2);
             Task_compostB tc = new Task_compostB(list);
             System.out.println(tc.cost);
-            t1= t1.UpdateValue(12);
+            t1.UpdateValue(12);
             System.out.println(tc.cost);
         }
 

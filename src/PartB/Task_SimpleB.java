@@ -10,6 +10,7 @@ import java.beans.PropertyChangeSupport;
 public class Task_SimpleB extends TaskB
 {
     public PropertyChangeSupport support;
+
     protected Task_SimpleB(BigDecimal cost)
     {
         super(cost);
@@ -18,14 +19,13 @@ public class Task_SimpleB extends TaskB
         if (this.cost.signum() <= 0) throw new IllegalArgumentException("cost must be positive");
     }
 
-    public Task_SimpleB UpdateValue(int value)
+    public void UpdateValue(int value)
     {
         BigDecimal old = this.cost;
         BigDecimal temp = BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
         if (this.cost.signum() <= 0) throw new IllegalArgumentException("cost must be positive");
         this.cost = new Task_SimpleB(temp).cost;
-        support.firePropertyChange("Task_CompostB",old,this.cost);
-        return new Task_SimpleB(temp);
+        support.firePropertyChange("Task_CompostB", old, this.cost);
     }
 
     public static void main(String[] args)
@@ -33,28 +33,7 @@ public class Task_SimpleB extends TaskB
 
         Task_SimpleB t = new Task_SimpleB(BigDecimal.valueOf(10));
         System.out.println(t.cost);
-        t = t.UpdateValue(19);
+        t.UpdateValue(19);
         System.out.println(t.cost);
     }
-
-    public void firePropertyChange(String propertyName, BigDecimal oldValue, BigDecimal newValue)
-    {
-
-    }
-
-    public record CostChanged(BigDecimal oldCost, BigDecimal newCost)
-    {
-        @Override
-        public BigDecimal oldCost()
-        {
-            return oldCost;
-        }
-
-        @Override
-        public BigDecimal newCost()
-        {
-            return newCost;
-        }
-    }
-
 }

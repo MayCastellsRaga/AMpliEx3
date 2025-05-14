@@ -10,22 +10,21 @@ public class Task_simple extends Task
         if (this.cost.signum() <= 0) throw new IllegalArgumentException("cost must be positive");
     }
 
-    public Task_simple UpdateValue(int value)
+    public void UpdateValue(int value)
     {
         BigDecimal old = this.cost;
         BigDecimal temp = BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
         if (this.cost.signum() <= 0) throw new IllegalArgumentException("cost must be positive");
-        this.cost = new Task_simple(temp).cost;
+        this.cost =temp;
         setChanged();
         notifyObservers(new CostChanged(old, this.cost));
-        return new Task_simple(temp);
     }
 
     public static void main(String[] args)
     {
         Task_simple t = new Task_simple(BigDecimal.valueOf(10));
         System.out.println(t.cost);
-        t = t.UpdateValue(19);
+        t.UpdateValue(19);
         System.out.println(t.cost);
     }
 

@@ -13,7 +13,7 @@ public class Main
             list.add(t2);
             Task_compost tc = new Task_compost(list);
             System.out.println(tc.cost);
-            t1= t1.UpdateValue(2);
+            t1.UpdateValue(2);
             System.out.println(tc.cost);
     }
 }

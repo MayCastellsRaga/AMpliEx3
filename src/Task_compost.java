@@ -21,7 +21,7 @@ public class Task_compost extends Task implements Observer
         this.cost = temp;
     }
 
-    private BigDecimal updateCost(Object arg) throws IllegalAccessException
+    private void updateCost(Object arg) throws IllegalAccessException
     {
         Task_simple.CostChanged values = (Task_simple.CostChanged) arg;
         BigDecimal old = values.oldCost();
@@ -30,25 +30,11 @@ public class Task_compost extends Task implements Observer
         this.cost = this.cost.add(act);
         this.cost = cost.setScale(2, RoundingMode.HALF_UP);
         if (this.cost.signum() <= 0) throw new IllegalArgumentException("cost must be positive");
-        return null;
     }
-
-    public static void main(String[] args)
-    {
-        Task_simple t1 = new Task_simple(BigDecimal.valueOf(10));
-        Task_simple t2 = new Task_simple(BigDecimal.valueOf(10));
-        List<Task_simple> list = new ArrayList<Task_simple>();
-        list.add(t1);
-        list.add(t2);
-        Task_compost tc = new Task_compost(list);
-        System.out.println(tc.cost);
-    }
-
     @Override
     public void update(Observable o, Object arg)
     {
         System.out.println("hey");
-
         try
         {
             updateCost(arg);
@@ -57,6 +43,4 @@ public class Task_compost extends Task implements Observer
             throw new RuntimeException(e);
         }
     }
-
-
 }

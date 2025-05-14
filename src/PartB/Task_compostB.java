@@ -61,7 +61,6 @@ public class Task_compostB extends TaskB implements PropertyChangeListener
     {
         BigDecimal act = (BigDecimal) evt.getNewValue();
         BigDecimal old = (BigDecimal) evt.getOldValue();
-
         try
         {
             updateCost(old,act);
